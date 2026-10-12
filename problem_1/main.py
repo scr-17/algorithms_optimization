@@ -1,7 +1,6 @@
 import multiprocessing as mp
 import random
 import time
-from math import log2
 
 
 def estimate_pi(seed: int, samples: int = 1_000_000) -> float:
@@ -16,7 +15,6 @@ if __name__ == "__main__":
     seq_results = [estimate_pi(s) for s in seeds]
     t_seq = time.perf_counter() - t0
 
-    print(f"Cpu_count: {mp.cpu_count()}")
     t0 = time.perf_counter()
     with mp.Pool(processes=mp.cpu_count()) as pool:
         par_results = pool.map(estimate_pi, seeds)

@@ -1,6 +1,7 @@
 import multiprocessing as mp
 import random
 import time
+from math import log2
 
 
 def estimate_pi(seed: int, samples: int = 1_000_000) -> float:
@@ -15,6 +16,7 @@ if __name__ == "__main__":
     seq_results = [estimate_pi(s) for s in seeds]
     t_seq = time.perf_counter() - t0
 
+    print(f"Cpu_count: {mp.cpu_count()}")
     t0 = time.perf_counter()
     with mp.Pool(processes=mp.cpu_count()) as pool:
         par_results = pool.map(estimate_pi, seeds)
@@ -24,3 +26,14 @@ if __name__ == "__main__":
     print(
         f"pi estimate (mean of {len(seeds)} runs): {sum(par_results)/len(par_results):.5f}"
     )
+
+    print("\nSpeedup")
+    i, times = 1, []
+    while i <= 8:
+        print(f"{i} processes")
+        t0 = time.perf_counter()
+        with mp.Pool(processes=i) as pool:
+            results = pool.map(estimate_pi, list(range(i)))
+        t_plot = time.perf_counter() - t0
+        print(f"Time: {t_plot:.3f}")
+        i *= 2

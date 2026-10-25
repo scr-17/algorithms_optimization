@@ -3,9 +3,9 @@
 
 ## Execution
 ### Requirements
-## Every code requires for its execution the python interpreter and its module matplotlib
+#### Every code requires for its execution the python interpreter and its module matplotlib
 
-### To run each code, in your terminal, go to the respective folder of the file and execute the command:
+#### To run each code, in your terminal, go to the respective folder of the file and execute the command:
 
 ```shell 
 python main.py
